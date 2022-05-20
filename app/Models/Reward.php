@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reward extends Model
 {
     // models untuk menampilkan reward nasabah
-    protected $table = 'Reward';
+    protected $table = 'reward';
 
     protected $fillable = [
         'nasabah_id',

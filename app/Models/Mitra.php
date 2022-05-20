@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mitra extends Model
 {
     //
-    protected $table = 'Mitra';
+    protected $table = 'mitra';
 
     protected $fillable = [
         'nama_mitra',

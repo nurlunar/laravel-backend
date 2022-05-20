@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Saldo extends Model
 {
     //
-    protected $table = 'Saldo';
+    protected $table = 'saldo';
 
     protected $fillable = [
         'nasabah_id',

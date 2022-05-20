@@ -18,10 +18,3 @@ Route::get('/', function () {
 });
 
 
-
-
-
-
-
-
-
