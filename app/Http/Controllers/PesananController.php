@@ -35,20 +35,11 @@ class PesananController extends Controller
         }
     }
 
-    public function pesanan_show(Request $request)
+    public function pesanan_show()
     {
         // perintah untuk menampilkan data dari tabel nasabah 
-        $result = Pesanan::find($request->nasabah_id);
-
+        $result = Pesanan::get();
         // perintah data yang akan di tampilkan
-
-        if ($result != null) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Berhasil menampilkan detail pesanan',
-                'data' => $result,
-            ], 200);
-        } else {
         return response()->json([
             'status' => true,
             'message' => 'Berhasil menampilkan pesanan Nasabah',
@@ -56,15 +47,13 @@ class PesananController extends Controller
         ], 200);
         
     }
-}
-    public function pesanan_nasabah_show($id)
 
-    {
-      
-        // perintah untuk menampilkan data dari tabel nasabah
+    public function pesanan_nasabah_show($id)
+      {
+        //perintah untuk menampilkan data dari tabel nasabah
         $result = Pesanan::find($id);
       
-        // perintah data yang akan di tampilkan
+        //perintah data yang akan di tampilkan
         if ($result != null) {
             return response()->json([
                 'status' => true,
@@ -78,7 +67,8 @@ class PesananController extends Controller
             ], 200);
         }
     }
-    public function update_pesanan_nasabah(Request $request)
+
+public function update_pesanan_nasabah(Request $request)
     {
      
         $nasabah_id                     = $request->nasabah_id;
@@ -112,8 +102,9 @@ class PesananController extends Controller
                 'message' => 'Pesanan Nasabah Gagal Diupdate!',
             ], 200);
         }
-    } 
-    public function pesanan_nasabah_store(Request $request)
+    }
+
+    public function pesanan_nasabah_store (Request $request)
     {
         // Ini berfungsi untuk menginput nilai dari front end
         //$variabel_nama_mitra    = $request->nama_mitra_frontend;
@@ -150,4 +141,5 @@ class PesananController extends Controller
             ], 200);
         }
     }
-}  
+}
+
