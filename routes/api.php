@@ -79,7 +79,7 @@ Route::prefix('mitra')->group(function () {
     Route::post('/saldo_nasabah_store','SaldoController@saldo_nasabah_store_for_mitra');
     Route::post('/reward_nasabah_store','RewardController@reward_nasabah_store_for_mitra');
     Route::post('/update_status_pesanan','PesananController@update_status_pesanan_for_mitra');
-
+    Route::get('/pesanan_show','PesananController@pesanan_show');
 });
 
 Route::prefix('nasabah')->group(function () {
