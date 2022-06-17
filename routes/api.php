@@ -44,6 +44,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/nasabah_store','NasabahController@nasabah_store_for_admin');
     Route::post('/update_nasabah/{id}','NasabahController@update_nasabah_for_admin');
     Route::post('/delete_nasabah/{id}','NasabahController@delete_nasabah_for_admin');
+    Route::get('/pesanan_show','PesananController@pesanan_show');
 
 
      // MasterSampah
