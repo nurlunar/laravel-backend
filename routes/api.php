@@ -100,6 +100,8 @@ Route::prefix('nasabah')->group(function () {
     Route::get('/detail_pesanan_show/{id}','PesananController@pesanan_nasabah_show');
     Route::post('/update_pesanan_nasabah/{id}','PesananController@update_pesanan_nasabah');
     Route::post('/pesanan_nasabah_store','PesananController@pesanan_nasabah_store');
+    Route::post('/delete_pesanan/{id}','PesananController@delete_pesanan');
+
 });
 
 // RANGGA

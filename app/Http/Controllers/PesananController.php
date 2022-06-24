@@ -141,5 +141,23 @@ public function update_pesanan_nasabah(Request $request)
             ], 200);
         }
     }
+    public function delete_pesanan($id)
+    {
+        // ...
+        $pesanan = Pesanan::find($id)->delete();
+        
+      if ($pesanan){
+           return response()->json([
+               'success' => true,
+               'message' => 'Pesanan Berhasil Dihapus!',
+                
+           ], 200);
+       } else {
+           return response()->json([
+                'success' => false,
+                'message' => 'Pesanan Gagal Dihapus!',
+           ], 200);
+       }
+    }
 }
 
