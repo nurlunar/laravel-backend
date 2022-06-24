@@ -38,7 +38,7 @@ class PesananController extends Controller
     public function pesanan_show()
     {
         // perintah untuk menampilkan data dari tabel nasabah 
-        $result = Pesanan::get();
+        $result = Pesanan::orderBy('created_at', 'desc')->get();
         // perintah data yang akan di tampilkan
         return response()->json([
             'status' => true,
@@ -71,23 +71,23 @@ class PesananController extends Controller
 public function update_pesanan_nasabah(Request $request)
     {
      
-        $nasabah_id                     = $request->nasabah_id;
-        $mitra_id                       = $request->mitra_id;
-        $kategori                       = $request->kategori;
+        // $nasabah_id                     = $request->nasabah_id;
+        // $mitra_id                       = $request->mitra_id;
+        // $kategori                       = $request->kategori;
         $berat                          = $request->berat;
         $harga                          = $request->harga;
         $total                          = $request->total;
-        $diterima                       = $request->diterima;
+        // $diterima                       = $request->diterima;
         
         // Ini berfungsi untuk menyimpan data hasil dari Eloquent Mitra::update
         $hasil_update_pesanan = Pesanan::where('id', $request-> id)->update([
-            'nasabah_id'            =>  $request->nasabah_id,
-            'mitra_id'              =>  $request->mitra_id,
-            'kategori'              =>  $request->kategori,
+            // 'nasabah_id'            =>  $request->nasabah_id,
+            // 'mitra_id'              =>  $request->mitra_id,
+            // 'kategori'              =>  $request->kategori,
             'berat'                 =>  $request->berat,
             'harga'                 =>  $request->harga,
             'total'                 =>  $request->total,
-            'diterima'              =>  $request->diterima
+            // 'diterima'              =>  $request->diterima
         ]);
 
         // Ini berfungsi untuk menampilkan hasil bahwa data berhasil di simpan 
