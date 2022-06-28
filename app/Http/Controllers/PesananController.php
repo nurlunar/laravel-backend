@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Nasabah;
 use App\Models\Saldo;
 use App\Models\Pesanan;
 
@@ -52,6 +52,7 @@ class PesananController extends Controller
       {
         //perintah untuk menampilkan data dari tabel nasabah
         $result = Pesanan::find($id);
+        //$nasabah = Pesanan::find(13)->nasabah;
       
         //perintah data yang akan di tampilkan
         if ($result != null) {
@@ -106,9 +107,13 @@ public function update_pesanan_nasabah(Request $request)
 
     public function pesanan_nasabah_store (Request $request)
     {
+        $pesanan = Pesanan::find(13);
+        $nasabah = Pesanan::find(13)->nasabah; 
+        
         // Ini berfungsi untuk menginput nilai dari front end
         //$variabel_nama_mitra    = $request->nama_mitra_frontend;
         $nasabah_id                     = $request->nasabah_id;
+        $nasabah                        = $request->nama;
         $mitra_id                       = $request->mitra_id;
         $kategori                       = $request->kategori;
         $berat                          = $request->berat;
@@ -119,6 +124,7 @@ public function update_pesanan_nasabah(Request $request)
         // Ini berfungsi untuk menyimpan data hasil dari Eloquent Mitra::create
         $hasil_simpan_pesanan= Pesanan::create([
             'nasabah_id'            =>  $request->nasabah_id,
+            'nasabah'               =>  $request->nama,
             'mitra_id'              =>  $request->mitra_id,
             'kategori'              =>  $request->kategori,
             'berat'                 =>  $request->berat,

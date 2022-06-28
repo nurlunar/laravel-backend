@@ -4,10 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Pesanan extends Model
 {
     //
     protected $table = 'pesanan';
+
+    public function Nasabah()
+{
+    return $this-> belongTo(
+        'App/Nasabah' 
+    );
+}
 
     protected $fillable = [
         'nasabah_id',
@@ -20,3 +28,9 @@ class Pesanan extends Model
         
     ];
 }
+// public function nama()
+// {
+//     return $this-> hasone(
+//         'App/Nama' 
+//     );
+// }

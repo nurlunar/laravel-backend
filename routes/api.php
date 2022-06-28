@@ -77,10 +77,13 @@ Route::prefix('mitra')->group(function () {
 
     Route::get('/nasabah_show','NasabahController@nasabah_show_for_mitra');
     Route::get('/mitra_show','MitraController@mitra_show_for_mitra');
+    Route::get('/mitra_show/{id}','MitraController@mitra_show');
+    Route::post('/update_mitra/{id}','MitraController@update_mitra');
     Route::post('/saldo_nasabah_store','SaldoController@saldo_nasabah_store_for_mitra');
     Route::post('/reward_nasabah_store','RewardController@reward_nasabah_store_for_mitra');
     Route::post('/update_status_pesanan','PesananController@update_status_pesanan_for_mitra');
     Route::get('/pesanan_show','PesananController@pesanan_show');
+    Route::get('/saldo_nasabah_show/{nasabah_id}','SaldoController@saldo_nasabah_show');
 });
 
 Route::prefix('nasabah')->group(function () {

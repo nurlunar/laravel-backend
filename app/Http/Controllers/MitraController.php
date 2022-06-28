@@ -148,15 +148,79 @@ class MitraController extends Controller
 
 public function mitra_show_for_nasabah(Request $request)
 {
-    $result = Mitra::get();
+        $result = Mitra::get();
 
-    // perintah data yang akan di tampilkan
-    return response()->json([
-        'status' => true,
-        'message' => 'Berhasil menampilkan data mitra',
-        'data' => $result,
-    ], 200);
-    
-        } 
+        // perintah data yang akan di tampilkan
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menampilkan data mitra',
+            'data' => $result,
+        ], 200);
     }
 
+    
+   
+
+    
+
+
+
+public function mitra_show($id)
+  {
+       // perintah untuk menampilkan data dari tabel mitra
+        $result = Mitra::find($id);
+      
+        // perintah data yang akan di tampilkan
+        if ($result != null) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil menampilkan data mitra',
+                'data' => $result,
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Mitra tidak ditemukan',
+            ], 200);
+        }
+    }
+
+    
+
+    public function update_mitra(Request $request)
+    {
+
+        $id                           = $request->id;
+        $nama_mitra                   = $request->nama_mitra;
+        $alamat_mitra                 = $request->alamat_mitra;
+        $no_telepon                   = $request->no_telepon;
+        $email                        = $request->email;
+        $username                     = $request->username;
+        $password                     = $request->password;
+        $foto                         = $request->foto;
+
+        // Ini berfungsi untuk menyimpan data hasil dari Eloquent Mitra::update
+        $hasil_update_mitra= Mitra::where('id', $request-> id)->update([
+            'nama_mitra'           =>  $request->nama_mitra,
+            'alamat_mitra'         =>  $request->alamat_mitra,
+            'no_telepon'           =>  $request->no_telepon,
+            'email'                =>  $request->email,
+            'username'             =>  $request->username,
+            'password'             =>  $request->password,
+            'foto'                 =>  $request->foto
+        ]);
+
+        // Ini berfungsi untuk menampilkan hasil bahwa data berhasil di simpan 
+        if ($hasil_update_mitra) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data mitra Berhasil Diupdate!',
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data mitra Gagal Diupdate!',
+            ], 200);
+        }
+    }
+}
