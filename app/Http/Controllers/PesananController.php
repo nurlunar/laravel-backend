@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Nasabah;
 use App\Models\Saldo;
 use App\Models\Pesanan;
+use App\Models\Reward;
 
 class PesananController extends Controller
 {
@@ -23,6 +24,15 @@ class PesananController extends Controller
 
         // Ini berfungsi untuk menampilkan hasil bahwa data berhasil di simpan 
         if ($hasil_update_pesanan) {
+            $pesananFind = Pesanan::find($request->id);
+            $poinWithComma = $pesananFind->total / 10000;
+            $poinWithoutComma = number_format($poinWithComma, 2, '.', '');
+
+            Reward::create([
+                'nasabah_id'    =>  $pesananFind->nasabah_id,
+                'jumlah_point'  =>  $poinWithoutComma
+            ]);
+
             return response()->json([
                 'success' => true,
                 'message' => 'Data pesanan Berhasil Diupdate!',
@@ -35,17 +45,53 @@ class PesananController extends Controller
         }
     }
 
-    public function pesanan_show()
-    {
+    public function role_admin_beranda() {
         // perintah untuk menampilkan data dari tabel nasabah 
-        $result = Pesanan::orderBy('created_at', 'desc')->get();
+        $result = Pesanan::where('diterima', 1)->get();
+
+        $berat = 0;
+        $pendapatan = 0;
+
+        foreach ($result as $key => $value) {
+            $berat = $berat + ($value->berat ?? 0);
+            $pendapatan = $pendapatan + ($value->total ?? 0);
+        }
+
+        // perintah data yang akan di tampilkan
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menampilkan pesanan Nasabah',
+            'total_berat' => $berat,
+            'total_pendapatan' => $pendapatan
+        ], 200);
+    }
+
+
+    public function pesanan_show($mitra_id) {
+        // perintah untuk menampilkan data dari tabel nasabah 
+        $result = Pesanan::with('nasabah_belongs_to')
+                            ->where('mitra_id', $mitra_id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+
         // perintah data yang akan di tampilkan
         return response()->json([
             'status' => true,
             'message' => 'Berhasil menampilkan pesanan Nasabah',
             'data' => $result,
         ], 200);
-        
+    }
+
+    public function role_nasabah_pesanan_show(Request $request) {
+        // perintah untuk menampilkan data dari tabel nasabah 
+        $result = Pesanan::where('nasabah_id', $request->nasabah_id)->orderBy('created_at', 'desc')->get();
+
+        // perintah data yang akan di tampilkan
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menampilkan pesanan Nasabah',
+            'data' => $result,
+        ], 200);
     }
 
     public function pesanan_nasabah_show($id)
@@ -106,10 +152,7 @@ public function update_pesanan_nasabah(Request $request)
     }
 
     public function pesanan_nasabah_store (Request $request)
-    {
-        $pesanan = Pesanan::find(13);
-        $nasabah = Pesanan::find(13)->nasabah; 
-        
+    {       
         // Ini berfungsi untuk menginput nilai dari front end
         //$variabel_nama_mitra    = $request->nama_mitra_frontend;
         $nasabah_id                     = $request->nasabah_id;

@@ -12,6 +12,5 @@ class Reward extends Model
     protected $fillable = [
         'nasabah_id',
         'jumlah_point' 
-        
     ];
 }
