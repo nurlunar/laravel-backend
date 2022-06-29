@@ -84,6 +84,7 @@ Route::prefix('mitra')->group(function () {
     Route::post('/update_status_pesanan','PesananController@update_status_pesanan_for_mitra');
     Route::get('/pesanan_show','PesananController@pesanan_show');
     Route::get('/saldo_nasabah_show/{nasabah_id}','SaldoController@saldo_nasabah_show');
+    Route::get('/sampah_show','MasterSampahController@master_sampah_show_for_mitra');
 });
 
 Route::prefix('nasabah')->group(function () {

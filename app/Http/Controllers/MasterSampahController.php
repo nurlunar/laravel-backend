@@ -144,4 +144,19 @@ class MasterSampahController extends Controller
              'data' => $result,
          ], 200);
     }
+
+    public function master_sampah_show_for_mitra()
+    {
+
+    // ...
+        // perintah untuk menampilkan data dari tabel nasabah 
+        $result = MasterSampah::get();
+
+        // perintah data yang akan di tampilkan
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menampilkan data sampah',
+            'data' => $result,
+        ], 200);
+    }
 }
