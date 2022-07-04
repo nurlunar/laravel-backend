@@ -82,7 +82,7 @@ Route::prefix('mitra')->group(function () {
     Route::post('/saldo_nasabah_store','SaldoController@saldo_nasabah_store_for_mitra');
     Route::post('/reward_nasabah_store','RewardController@reward_nasabah_store_for_mitra');
     Route::post('/update_status_pesanan','PesananController@update_status_pesanan_for_mitra');
-    Route::get('/pesanan_show','PesananController@pesanan_show');
+    Route::get('/pesanan_show/{mitra_id}','PesananController@pesanan_show');
     Route::get('/saldo_nasabah_show/{nasabah_id}','SaldoController@saldo_nasabah_show');
     Route::get('/sampah_show','MasterSampahController@master_sampah_show_for_mitra');
 });
@@ -100,7 +100,7 @@ Route::prefix('nasabah')->group(function () {
     Route::post('/update_nasabah/{id}','NasabahController@update_nasabah');
     Route::get('/sampah_show','MasterSampahController@master_sampah_show_for_nasabah');
     Route::get('/mitra_show','MitraController@mitra_show_for_nasabah');
-    Route::get('/pesanan_show','PesananController@pesanan_show');
+    Route::get('/pesanan_show','PesananController@role_nasabah_pesanan_show');
     Route::get('/detail_pesanan_show/{id}','PesananController@pesanan_nasabah_show');
     Route::post('/update_pesanan_nasabah/{id}','PesananController@update_pesanan_nasabah');
     Route::post('/pesanan_nasabah_store','PesananController@pesanan_nasabah_store');

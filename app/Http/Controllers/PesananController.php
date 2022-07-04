@@ -35,7 +35,9 @@ class PesananController extends Controller
         }
     }
 
-    public function pesanan_show()
+    
+
+    public function role_nasabah_pesanan_show()
     {
         // perintah untuk menampilkan data dari tabel nasabah 
         $result = Pesanan::orderBy('created_at', 'desc')->get();
@@ -47,27 +49,24 @@ class PesananController extends Controller
         ], 200);
         
     }
+    public function pesanan_show ($mitra_id){
+        // perintah untuk menampilkan data dari tabel nasabah 
+        $result = Pesanan::orderBy('created_at', 'desc')->get();
+        $result = Pesanan::with('nasabah_belongs_to')
+                            ->where('mitra_id', $mitra_id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
 
-    public function pesanan_nasabah_show($id)
-      {
-        //perintah untuk menampilkan data dari tabel nasabah
-        $result = Pesanan::find($id);
-        //$nasabah = Pesanan::find(13)->nasabah;
-      
-        //perintah data yang akan di tampilkan
-        if ($result != null) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Berhasil menampilkan detail pesanan',
-                'data' => $result,
-            ], 200);
-        } else {
-            return response()->json([
-                'status' => false,
-                'message' => 'Pesanan tidak ditemukan',
-            ], 200);
-        }
+        // perintah data yang akan di tampilkan
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menampilkan pesanan Nasabah',
+            'data' => $result,
+        ], 200);
     }
+
+
+    
 
 public function update_pesanan_nasabah(Request $request)
     {
@@ -107,13 +106,14 @@ public function update_pesanan_nasabah(Request $request)
 
     public function pesanan_nasabah_store (Request $request)
     {
-        $pesanan = Pesanan::find(13);
-        $nasabah = Pesanan::find(13)->nasabah; 
+        //$pesanan = Pesanan::find(13);
+        //$nasabah = Pesanan::find(13)->nasabah; 
         
         // Ini berfungsi untuk menginput nilai dari front end
         //$variabel_nama_mitra    = $request->nama_mitra_frontend;
         $nasabah_id                     = $request->nasabah_id;
         $nasabah                        = $request->nama;
+        $nasabah                        = $request->alamat;
         $mitra_id                       = $request->mitra_id;
         $kategori                       = $request->kategori;
         $berat                          = $request->berat;
@@ -125,6 +125,7 @@ public function update_pesanan_nasabah(Request $request)
         $hasil_simpan_pesanan= Pesanan::create([
             'nasabah_id'            =>  $request->nasabah_id,
             'nasabah'               =>  $request->nama,
+            'nasabah'               =>  $request->alamat,
             'mitra_id'              =>  $request->mitra_id,
             'kategori'              =>  $request->kategori,
             'berat'                 =>  $request->berat,
