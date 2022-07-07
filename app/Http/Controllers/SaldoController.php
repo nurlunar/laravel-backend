@@ -41,7 +41,7 @@ class SaldoController extends Controller
         $mitra_id                   = $request->mitra_id;
         $pemasukan                  = $request->pemasukan;
         $pengeluaran                = $request->pengeluaran;
-        $keterangan                 = ($request->pemasukan != null) ? 'Saldo ditambah' : 'Saldo ditarik';
+        $keterangan                 = $request->keterangan;
         
         // Ini berfungsi untuk menyimpan data hasil dari Eloquent Mitra::create
         $hasil_simpan_saldo = Saldo::create([
@@ -75,7 +75,7 @@ class SaldoController extends Controller
         $mitra_id                   = $request->mitra_id;
         $pemasukan                  = $request->pemasukan;
         $pengeluaran                = $request->pengeluaran;
-        $keterangan                 = ($request->pemasukan != null) ? 'Saldo ditambah' : 'Saldo ditarik';
+        $keterangan                 = $request->keterangan;
         
         // Ini berfungsi untuk menyimpan data hasil dari Eloquent Mitra::update
         $hasil_update_saldo= Saldo::where('id', $request-> id)->update([
@@ -116,7 +116,7 @@ class SaldoController extends Controller
         $mitra_id                   = $request->mitra_id;
         $pemasukan                  = $request->pemasukan;
         $pengeluaran                = $request->pengeluaran;
-        $keterangan                 = ($request->pemasukan != null) ? 'Saldo ditambah' : 'Saldo ditarik';
+        $keterangan                 = $request->keterangan;
         
         // Ini berfungsi untuk menyimpan data hasil dari Eloquent Mitra::create
         $hasil_simpan_saldo = Saldo::create([

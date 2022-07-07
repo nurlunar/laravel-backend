@@ -30,6 +30,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', 'LoginController@login_admin');
 
 
+    // Beranda
+    Route::get('/beranda','PesananController@role_admin_beranda');
+
     // Mitra
     Route::get('/mitra_show','MitraController@mitra_show_for_admin');
     Route::get('/mitra_detail/{id}','MitraController@mitra_detail_for_admin');
@@ -59,12 +62,6 @@ Route::prefix('admin')->group(function () {
      Route::get('/saldo_mitra_show/{mitra_id}','SaldoController@saldo_mitra_show_for_admin');
      Route::post('/saldo_mitra_store','SaldoController@saldo_mitra_store_for_admin');
      Route::post('/saldo_mitra_update','SaldoController@saldo_mitra_update_for_admin');
-     //Route::post('/delete_sampah/{id}','MasterSampahController@master_sampah_delete_for_admin');
-
-     // Saldo Nasabah
-     //Route::get('/saldo_nasabah_show/{nasabah_id}','SaldoController@saldo_nasabah_show_for_admin');
-     //Route::post('/saldo_nasabah_store','SaldoController@saldo_nasabah_store_for_admin');
-     //Route::post('/saldo_nasabah_update/{id}','SaldoController@saldo_nasabah_update_for_admin');
  
 });
 
